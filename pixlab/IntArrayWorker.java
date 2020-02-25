@@ -98,5 +98,17 @@ public class IntArrayWorker
       }
     }
   }
- 
+  public int getCount(int x)
+  {
+      int temp=0;
+      for( int z=0;z<matrix.length;z++)
+      {
+          for (int a=0;a<matrix[0].length;a++)
+                {
+                    if(matrix [z][a]==x)
+                    temp=temp+1;
+                }
+      }
+      return temp;
+  }    
 }
