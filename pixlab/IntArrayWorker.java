@@ -10,7 +10,19 @@ public class IntArrayWorker
   {
     matrix = theMatrix;
   }
-  
+  public int getLargest()
+  {
+      int answer=matrix [0][0];
+      for(int i=0;i<matrix.length;i++)
+      {
+          for(int j=0;j<matrix[0].length;j++)
+          {
+              if(matrix[i][j]>answer)
+              answer= matrix [i][j];
+          }
+      }
+      return answer;
+  }
   /**
    * Method to return the total 
    * @return the total of the values in the array
@@ -110,5 +122,14 @@ public class IntArrayWorker
                 }
       }
       return temp;
-  }    
+  } 
+  public int getColTotal(int z)
+  {
+      int sum=0;
+      for( int i=0;i<matrix.length;i++)
+      {
+          sum=sum+matrix[i][z];
+      }
+      return sum;
+  }
 }
