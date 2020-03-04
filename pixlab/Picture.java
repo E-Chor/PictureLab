@@ -196,13 +196,45 @@ public void fixUnderwater()
     Pixel topPixel = null;
     Pixel bottomPixel = null;
     int width = pixels[0].length;
-    for (int row = 0; row < pixels.length/2; row++)
+    for (int row = 0; row < (pixels.length)/2; row++)
     {
       for (int col = 0; col < width; col++)
       {
         topPixel = pixels[row][col];
-        bottomPixel = pixels[pixels.length-row][width];
+        bottomPixel = pixels[pixels.length-1-row][col];
         bottomPixel.setColor(topPixel.getColor());
+      }
+    } 
+  }
+  public void mirrorHorizontalBotToTop()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
+    int width = pixels[0].length;
+    for (int row = 0; row < (pixels.length)/2; row++)
+    {
+      for (int col = 0; col < width; col++)
+      {
+        topPixel = pixels[row][col];
+        bottomPixel = pixels[pixels.length-1-row][col];
+        topPixel.setColor(bottomPixel.getColor());
+      }
+    } 
+  }
+   public void mirrorDiagonal()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    int width = pixels[0].length;
+    for (int row = 0; row < pixels.length; row++)
+    {
+      for (int col = 0; col <= row; col++)
+      {
+        leftPixel = pixels[row][col];
+        rightPixel = pixels[col][row];
+        rightPixel.setColor(leftPixel.getColor());
       }
     } 
   }
@@ -231,7 +263,7 @@ public void fixUnderwater()
     Pixel rightPixel = null;
     int count = 0;
     Pixel[][] pixels = this.getPixels2D();
-    
+    int answer =0;
     // loop through the rows
     for (int row = 27; row < 97; row++)
     {
@@ -243,10 +275,33 @@ public void fixUnderwater()
         rightPixel = pixels[row]                       
                          [mirrorPoint - col + mirrorPoint];
         rightPixel.setColor(leftPixel.getColor());
+        answer=answer+1;
       }
     }
+    System.out.println(answer);
   }
-  
+  public void mirrorArms()
+  {
+    int mirrorPoint = 180;
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
+    Pixel rightTopPixel = null;
+    Pixel rightBottomPixel = null;
+    Pixel[][] pixels = this.getPixels2D();
+    // loop through the rows
+    for (int row = 155; row < 180; row++)
+    {
+      // loop from 13 to just before the mirror point
+    for (int col = 100; col < 160 ; col++)
+      {
+        
+        topPixel = pixels[row][col];      
+        bottomPixel = pixels[mirrorPoint+mirrorPoint-row]                       
+                         [col];
+        bottomPixel.setColor(topPixel.getColor());
+      }
+  } 
+ }
   /** copy from the passed fromPic to the
     * specified startRow and startCol in the
     * current picture
