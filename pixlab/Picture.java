@@ -283,10 +283,13 @@ public void fixUnderwater()
   public void mirrorArms()
   {
     int mirrorPoint = 180;
+    int secondMirrorPoint = 200;
     Pixel topPixel = null;
     Pixel bottomPixel = null;
     Pixel rightTopPixel = null;
     Pixel rightBottomPixel = null;
+    Pixel secondTopPixel = null;
+    Pixel secondBottomPixel = null;
     Pixel[][] pixels = this.getPixels2D();
     // loop through the rows
     for (int row = 155; row < 180; row++)
@@ -300,8 +303,43 @@ public void fixUnderwater()
                          [col];
         bottomPixel.setColor(topPixel.getColor());
       }
+        for (int secondRow = 155; secondRow < 205; secondRow++)
+    {
+    for (int secondCol = 100; secondCol < 165 ; secondCol++)
+      {
+        
+        secondTopPixel = pixels[secondRow][secondCol];      
+        secondBottomPixel = pixels[secondRow]                       
+                         [secondMirrorPoint+secondMirrorPoint-secondCol];
+        secondBottomPixel.setColor(secondTopPixel.getColor());
+      }
+    }
   } 
  }
+ public void mirrorGull()
+  {
+    int mirrorPoint = 345;
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+    int count = 0;
+    Pixel[][] pixels = this.getPixels2D();
+    int answer =0;
+    // loop through the rows
+    for (int row = 230; row < 330; row++)
+    {
+      // loop from 13 to just before the mirror point
+      for (int col = 230; col < 345; col++)
+      {
+        
+        leftPixel = pixels[row][col];      
+        rightPixel = pixels[row]                       
+                         [mirrorPoint - col + mirrorPoint];
+        rightPixel.setColor(leftPixel.getColor());
+        answer=answer+1;
+      }
+    }
+    System.out.println(answer);
+  }
   /** copy from the passed fromPic to the
     * specified startRow and startCol in the
     * current picture
@@ -332,7 +370,56 @@ public void fixUnderwater()
       }
     }   
   }
-
+  public void secondCopy(Picture fromPic, 
+                 int startRow, int startCol, int fromStartRow, int fromEndRow,
+                 int fromStartCol, int fromEndCol)
+  {
+    Pixel fromPixel = null;
+    Pixel toPixel = null;
+    Pixel[][] toPixels = this.getPixels2D();
+    Pixel[][] fromPixels = fromPic.getPixels2D();
+    for (int fromRow = fromStartRow, toRow = startRow; 
+         fromRow < fromEndRow &&
+         toRow < toPixels.length; 
+         fromRow++, toRow++)
+    {
+      for (int fromCol = fromStartCol, toCol = startCol; 
+           fromCol < fromEndCol &&
+           toCol < toPixels[0].length;  
+           fromCol++, toCol++)
+      {
+        fromPixel = fromPixels[fromRow][fromCol];
+        toPixel = toPixels[toRow][toCol];
+        toPixel.setColor(fromPixel.getColor());
+      }
+    }   
+  }
+  public void myCollage(Picture fromPic, 
+  int firstStartRow, int firstStartCol, int secondStartRow,
+  int secondStartCol, int thirdStartRow, int thirdStartCol,
+  int firstFromStartRow, int firstFromStartCol, int firstFromEndRow, int firstFromEndCol,
+  int secondFromStarRow,)
+  {
+    Pixel fromPixel = null;
+    Pixel toPixel = null;
+    Pixel[][] toPixels = this.getPixels2D();
+    Pixel[][] fromPixels = fromPic.getPixels2D();
+    for (int fromRow = fromStartRow, toRow = startRow; 
+         fromRow < fromEndRow &&
+         toRow < toPixels.length; 
+         fromRow++, toRow++)
+    {
+      for (int fromCol = fromStartCol, toCol = startCol; 
+           fromCol < fromEndCol &&
+           toCol < toPixels[0].length;  
+           fromCol++, toCol++)
+      {
+        fromPixel = fromPixels[fromRow][fromCol];
+        toPixel = toPixels[toRow][toCol];
+        toPixel.setColor(fromPixel.getColor());
+      }
+    }   
+  }
   /** Method to create a collage of several pictures */
   public void createCollage()
   {
@@ -349,7 +436,6 @@ public void fixUnderwater()
     this.mirrorVertical();
     this.write("collage.jpg");
   }
-  
   
   /** Method to show large changes in color 
     * @param edgeDist the distance for finding edges
