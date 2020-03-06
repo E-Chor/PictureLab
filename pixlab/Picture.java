@@ -398,27 +398,16 @@ public void fixUnderwater()
   int firstStartRow, int firstStartCol, int secondStartRow,
   int secondStartCol, int thirdStartRow, int thirdStartCol,
   int firstFromStartRow, int firstFromStartCol, int firstFromEndRow, int firstFromEndCol,
-  int secondFromStarRow,)
+  int secondFromStartRow, int secondFromStartCol, int secondFromEndRow, int secondFromEndCol,
+  int thirdFromStartRow, int thirdFromStartCol, int thirdFromEndRow, int thirdFromEndCol)
+  
   {
-    Pixel fromPixel = null;
-    Pixel toPixel = null;
-    Pixel[][] toPixels = this.getPixels2D();
-    Pixel[][] fromPixels = fromPic.getPixels2D();
-    for (int fromRow = fromStartRow, toRow = startRow; 
-         fromRow < fromEndRow &&
-         toRow < toPixels.length; 
-         fromRow++, toRow++)
-    {
-      for (int fromCol = fromStartCol, toCol = startCol; 
-           fromCol < fromEndCol &&
-           toCol < toPixels[0].length;  
-           fromCol++, toCol++)
-      {
-        fromPixel = fromPixels[fromRow][fromCol];
-        toPixel = toPixels[toRow][toCol];
-        toPixel.setColor(fromPixel.getColor());
-      }
-    }   
+       fromPic.secondCopy(fromPic,firstStartRow,firstStartCol,firstFromStartRow,firstFromEndRow,
+       firstFromStartCol,firstFromEndCol);
+       fromPic.secondCopy(fromPic,secondStartRow,secondStartCol,secondFromStartRow,secondFromEndRow,
+       secondFromStartCol,secondFromEndCol);
+       fromPic.secondCopy(fromPic,thirdStartRow,thirdStartCol,thirdFromStartRow,thirdFromEndRow,
+       thirdFromStartCol,thirdFromEndCol);
   }
   /** Method to create a collage of several pictures */
   public void createCollage()
